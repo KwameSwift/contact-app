@@ -9,7 +9,7 @@ Contacts App is a set of RESTful APIs that can allow us to utilize an internatio
 
 DRF-YASG-powered API Documentation.
 
-- Visit `localhost:8000`
+- Visit `localhost:8001`
 - See Documentation in Browser
 - ✨Magic ✨
 
@@ -34,6 +34,9 @@ cd contact-app
 touch .env
 # Create an env file of the format illustrated in the .env.example, in the root folder
 docker-compose up -d --build
+
+# To view logs
+docker logs --follow contact-app_web_1
 ```
 
 Voilà ✨✨ - The app is up and running
@@ -45,26 +48,12 @@ git clone https://github.com/KwameSwift/contact-app.git
 cd contact-app
 # Create an env file of the format illustrated in the .env.example, in the root folder
 docker-compose up -d --build
+
+# To view logs
+docker logs --follow contact-app_web_1
 ```
 Voilà ✨✨ - The app is up and running
 
 ## Documentation
 
 With the app running visit `localhost:8001` in your browser to view documentation and interact with it.
-
-## Inspect Database
-
-Inspecting the database require the pgadmin installed.
-
-- Open pgadmin
-- Register a new server
-- Choose a name for the server
-- Click the `Connection` Tab
-  - Host = `localhost`
-  - Port = `5432`
-  - Maintenance database = `postgres`
-  - Username = `postgres`
-  - Password = `postgres`
-- Click `Save`
-
-Voilà ✨✨ - You can now inspect the database
