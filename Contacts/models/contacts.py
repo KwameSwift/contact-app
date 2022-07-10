@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.dispatch import receiver, Signal
 from django.db.models.signals import post_save
-from helpers.send_email import send_email
+from helpers.sendgrid import send_email
 from config.keys import SENDER_EMAIL
 
 pre_bulk_create = Signal(["objs", "batch_size"])
@@ -62,5 +62,5 @@ def bulk_create_handler(sender, **kwargs):
     objs = kwargs['objs']
     recipient_email = objs[0].user.email
     
-    send_email(recipient_email, SENDER_EMAIL, "Upload successful", "Your CSV records has been successfully uploaded to the database")
+    send_email(recipient_email, "Upload successful", "Your CSV records has been successfully uploaded to the database")
     

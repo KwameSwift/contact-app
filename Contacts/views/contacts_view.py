@@ -12,8 +12,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from helpers.validations import check_parameters
 from ..views.csv_upload import ProcessCSV
 from django.core.files.storage import FileSystemStorage
-from config.keys import CSV_PATH, SENDER_EMAIL
-from helpers.send_email import send_email
+from config.keys import CSV_PATH
 
 class AddNewContact(APIView):
     # Authenticate the incoming request

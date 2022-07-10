@@ -5,32 +5,41 @@ services:
     build: 
       context: ./
       dockerfile: Dockerfile
+    # command: python manage.py runserver [::]:8000
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    # command: python manage.py runserver [::]:8000
     volumes:
       - .:/app:rw
       - static_volume:/home/nalo/app/static
+    depends_on:
+      - pg_db
     ports:
-      - 8000:8000
-    networks:
-      - web
+      - 8001:8001
+    # networks:
+    #   - web
       # - node_socket
     env_file:
       - .env
 
-  redis:
-    image: 'bitnami/redis:latest'
-    ports:
-      - 6379:6379
+  pg_db:
+    env_file:
+      - .env
+    image: postgres:latest
     environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    # networks:
-    #   - node_socket
+        POSTGRES_USER: ${DB_USER}
+        POSTGRES_PASSWORD: ${DB_PASSWORD}
+        POSTGRES_DB: ${DB_NAME}
+    volumes:
+        - postgres_data:/tmp/pgdata
+    ports:
+      - "5432:5432"
+ 
 
-networks:
-  web:
+# networks:
+#   web:
   # node_socket:
 
 volumes:
   static_volume:
+  postgres_data:
+  

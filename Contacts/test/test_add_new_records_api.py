@@ -28,7 +28,8 @@ class TestAddRecords(APITestCase):
     def test_add_new_record(self):
         add_path = reverse('Add New Record')
         data = {
-            "phone_number" : '0022447788'
+            "phone_number" : '0022447788',
+            "user": self.user
         }
         response = self.client.post(add_path, data)
         expected_status_code = 201
@@ -40,13 +41,15 @@ class TestAddRecords(APITestCase):
     def test_add_already_existing_record(self):
         add_path1 = reverse('Add New Record')
         data = {
-            "phone_number" : '0022447788'
+            "phone_number" : '0022447788',
+            "user": self.user
         }
         self.client.post(add_path1, data)
 
         add_path2 = reverse('Add New Record')
         data = {
-            "phone_number" : '0022447788'
+            "phone_number" : '0022447788',
+            "user": self.user
         }
         response = self.client.post(add_path2, data)
 
@@ -91,7 +94,8 @@ class TestAddRecords(APITestCase):
             "phone_number" : '0011223344',
             "last_name": 'Kofi',
             "middle_name": 'Koko',
-            "address": 'Kumasi'
+            "address": 'Kumasi',
+            "user": self.user
         }
 
         response = self.client.post(add_path, data)
@@ -108,7 +112,8 @@ class TestAddRecords(APITestCase):
             "phone_number" : '0011223345',
             "first_name": 'Kofi',
             "middle_name": 'Koko',
-            "address": 'Kumasi'
+            "address": 'Kumasi',
+            "user": self.user
         }
 
         response = self.client.post(add_path, data)
@@ -125,7 +130,8 @@ class TestAddRecords(APITestCase):
             "phone_number" : '0011223346',
             "first_name": 'Kofi',
             "last_name": 'Koko',
-            "address": 'Kumasi'
+            "address": 'Kumasi',
+            "user": self.user
         }
 
         response = self.client.post(add_path, data)
@@ -142,7 +148,8 @@ class TestAddRecords(APITestCase):
             "phone_number" : '0011223347',
             "first_name": 'Kofi',
             "last_name": 'Koko',
-            "middel_name": 'Kumah'
+            "middel_name": 'Kumah',
+            "user": self.user
         }
 
         response = self.client.post(add_path, data)

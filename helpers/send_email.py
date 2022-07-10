@@ -4,6 +4,7 @@ import boto3
 from botocore.config import Config
 from botocore.exceptions import ClientError
 
+
 region = Config(
         region_name=AWS_REGION,
         signature_version='v4',
