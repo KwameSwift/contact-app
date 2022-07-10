@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  web:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # command: python manage.py runserver [::]:8000
+    volumes:
+      - .:/app:rw
+      - static_volume:/home/nalo/app/static
+    ports:
+      - 8000:8000
+    networks:
+      - web
+      # - node_socket
+    env_file:
+      - .env
+
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - 6379:6379
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    # networks:
+    #   - node_socket
+
+networks:
+  web:
+  # node_socket:
+
+volumes:
+  static_volume:
